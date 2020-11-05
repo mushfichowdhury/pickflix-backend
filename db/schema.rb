@@ -31,13 +31,15 @@ ActiveRecord::Schema.define(version: 2020_11_05_193133) do
     t.string "image"
     t.string "synopsis"
     t.string "rating"
-    t.string "type"
+    t.string "media"
     t.string "released"
     t.string "runtime"
     t.string "largeimage"
     t.string "unogsdate"
     t.string "imdbid"
     t.string "download"
+    t.integer "priority"
+    t.string "genre"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
