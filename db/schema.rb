@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_05_154239) do
+ActiveRecord::Schema.define(version: 2020_11_05_193133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "liked_movies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.boolean "watched"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_liked_movies_on_movie_id"
+    t.index ["user_id"], name: "index_liked_movies_on_user_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "netflixid"
+    t.string "title"
+    t.string "image"
+    t.string "synopsis"
+    t.string "rating"
+    t.string "type"
+    t.string "released"
+    t.string "runtime"
+    t.string "largeimage"
+    t.string "unogsdate"
+    t.string "imdbid"
+    t.string "download"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -24,4 +51,17 @@ ActiveRecord::Schema.define(version: 2020_11_05_154239) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "watched_movies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_watched_movies_on_movie_id"
+    t.index ["user_id"], name: "index_watched_movies_on_user_id"
+  end
+
+  add_foreign_key "liked_movies", "movies"
+  add_foreign_key "liked_movies", "users"
+  add_foreign_key "watched_movies", "movies"
+  add_foreign_key "watched_movies", "users"
 end
