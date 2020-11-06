@@ -4,17 +4,26 @@ class CreateMovies < ActiveRecord::Migration[6.0]
       t.string :netflixid
       t.string :title
       t.string :image
-      t.string :synopsis
       t.string :rating
       t.string :media
-      t.string :released
       t.string :runtime
       t.string :largeimage
-      t.string :unogsdate
       t.string :imdbid
-      t.string :download
       t.integer :priority
       t.string :genre
+      t.string :year
+      t.string :released
+      t.string :rated
+      t.string :director
+      t.string :writer
+      t.string :actors
+      t.string :plot
+      t.string :language
+      t.string :country
+      t.string :awards
+      t.string :poster
+      t.string :imdbRating
+      t.string :imdbVotes
 
       t.timestamps
     end

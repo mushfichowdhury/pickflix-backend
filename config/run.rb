@@ -22,4 +22,20 @@ def api_request
     binding.pry
 end
 
-api_request
+$api_key = "7cbd2aa6"
+
+def omdb_request(imdb_id, api_key)
+    url = URI("http://omdbapi.com/?i=#{imdb_id}&apikey=#{api_key}&plot=full")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = false
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    response = http.request(request)
+    readable_response = JSON.parse(response.read_body)
+    binding.pry
+end
+
+omdb_request("tt3896198", $api_key)
+
+# api_request
