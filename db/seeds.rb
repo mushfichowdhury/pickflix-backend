@@ -34,6 +34,16 @@ def get_all_horrors
     end
 end
 
+def get_all_actions
+    action_genre_ids = "90176,77232,43048,1568,43040,2653,10673,1365,801362"
+    action_page_num = 1
+
+    while action_page_num < 20
+        unogs_request(action_genre_ids, action_page_num)
+        action_page_num += 1
+    end
+end
+
 
 
 
@@ -55,7 +65,7 @@ def unogs_request(genre_id_string, page_num)
     
 end
 
-$api_key = "7cbd2aa6"
+$api_key = "91b02583"
 
 def omdb_request(imdb_id, api_key)
     url = URI("http://omdbapi.com/?i=#{imdb_id}&apikey=#{$api_key}&plot=full")
@@ -104,3 +114,4 @@ end
 
 get_all_comedies
 get_all_horrors
+get_all_actions
