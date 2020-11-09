@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Movie.destroy_all
+User.destroy_all
 
 require 'uri'
 require 'net/http'
@@ -14,11 +15,25 @@ require 'openssl'
 require 'JSON'
 require "pry"
 
+User.create({
+    email: "mushfi@gmail.com",
+    password_digest: "whatscooking",
+    bio: "Sylvia Woods was an American restaurateur who founded the sould food restaurant Sylvia's in Harlem on Lenox Avenue, New York City in 1962. She published two cookbooks and was an important figure in the community.",
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/4/49/Syvia_of_Sylvia%27s_reaturant_N.Y.C_%28cropped%29.jpg"
+  })
+
+  User.create({
+    email: "jake@gmail.com",
+    password_digest: "jakefromm",
+    bio: "The man, the myth, the legend.",
+    avatar: "https://ca.slack-edge.com/T019PM537NK-U01AQM7SG2K-f329e9d135f9-512"
+  })
+
 def get_all_comedies
     comedy_genre_ids = "11559,77230,11039,89585,77599,10375,78163,1003219,9302,1078"
     comedy_page_num = 1
     
-    while comedy_page_num < 20
+    while comedy_page_num < 3
         unogs_request(comedy_genre_ids, comedy_page_num)
         comedy_page_num += 1
     end  
@@ -28,7 +43,7 @@ def get_all_horrors
     horror_genre_ids = "83059,8711,89585,9509,45028,10944,48303,90848,8195,10695"
     horror_page_num = 1
 
-    while horror_page_num < 20
+    while horror_page_num < 3
         unogs_request(horror_genre_ids, horror_page_num)
         horror_page_num += 1
     end
@@ -38,7 +53,7 @@ def get_all_actions
     action_genre_ids = "90176,77232,43048,1568,43040,2653,10673,1365,801362"
     action_page_num = 1
 
-    while action_page_num < 20
+    while action_page_num < 3
         unogs_request(action_genre_ids, action_page_num)
         action_page_num += 1
     end

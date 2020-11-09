@@ -1,5 +1,5 @@
 class LikedMovieSerializer < ActiveModel::Serializer
-  attributes :id, :watched
+  attributes :id
   has_one :user
   has_one :movie
 end
