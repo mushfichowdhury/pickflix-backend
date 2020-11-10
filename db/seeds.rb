@@ -8,6 +8,7 @@
 
 Movie.destroy_all
 User.destroy_all
+LikedMovie.destroy_all
 
 require 'uri'
 require 'net/http'
@@ -16,18 +17,18 @@ require 'JSON'
 require "pry"
 
 User.create({
-    email: "mushfi@gmail.com",
-    password_digest: "whatscooking",
-    bio: "Sylvia Woods was an American restaurateur who founded the sould food restaurant Sylvia's in Harlem on Lenox Avenue, New York City in 1962. She published two cookbooks and was an important figure in the community.",
-    avatar: "https://upload.wikimedia.org/wikipedia/commons/4/49/Syvia_of_Sylvia%27s_reaturant_N.Y.C_%28cropped%29.jpg"
-  })
+    username: "mushfi123",
+    password_digest: "1234",
+    name: "Mushfi",
+    image: "https://www.gstatic.com/tv/thumb/persons/235135/235135_v9_ba.jpg"
+})
 
   User.create({
-    email: "jake@gmail.com",
-    password_digest: "jakefromm",
-    bio: "The man, the myth, the legend.",
-    avatar: "https://ca.slack-edge.com/T019PM537NK-U01AQM7SG2K-f329e9d135f9-512"
-  })
+    username: "jakethebake",
+    password_digest: "1234",
+    name: "Jake Fromm",
+    image: "https://ca.slack-edge.com/T019PM537NK-U01AQM7SG2K-f329e9d135f9-512"
+})
 
 def get_all_comedies
     comedy_genre_ids = "11559,77230,11039,89585,77599,10375,78163,1003219,9302,1078"
