@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
         render json: movies
     end
 
-    def new
+     def new
         @movie = Movie.new(movies_params)
     end
 
