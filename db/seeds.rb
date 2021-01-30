@@ -13,7 +13,7 @@
 require 'uri'
 require 'net/http'
 require 'openssl'
-require 'JSON'
+# require 'JSON'
 require "pry"
 
 User.create({
