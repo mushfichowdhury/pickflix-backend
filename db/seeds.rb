@@ -17,17 +17,10 @@ require 'openssl'
 require "pry"
 
 User.create({
-    username: "mushfi123",
+    username: "user",
     password_digest: "1234",
-    name: "Mushfi",
+    name: "Dwayne",
     image: "https://www.gstatic.com/tv/thumb/persons/235135/235135_v9_ba.jpg"
-})
-
-  User.create({
-    username: "jakethebake",
-    password_digest: "1234",
-    name: "Jake Fromm",
-    image: "https://ca.slack-edge.com/T019PM537NK-U01AQM7SG2K-f329e9d135f9-512"
 })
 
 # def get_all_comedies
