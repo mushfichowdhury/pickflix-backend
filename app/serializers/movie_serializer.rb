@@ -1,4 +1,3 @@
 class MovieSerializer < ActiveModel::Serializer
-  attributes :id, :netflixid, :title, :image, :rating, :media, :runtime, :largeimage, :imdbid, :priority, :genre, :year, :released, :rated, :director, :writer, :actors, :plot, :language, :country, :awards, :poster, :imdbRating, :imdbVotes
-
+  attributes :id, :backdrop, :first_air_date, :genre_ids, :movie_id, :name, :origin_country, :original_language, :original_name, :overview, :popularity, :poster, :vote_average, :vote_count
 end

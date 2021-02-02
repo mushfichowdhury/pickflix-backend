@@ -1,11 +1,11 @@
 class MoviesController < ApplicationController
-   
+
     def index
         movies = Movie.all 
         render json: movies
     end
 
-     def new
+    def new
         @movie = Movie.new(movies_params)
     end
 
