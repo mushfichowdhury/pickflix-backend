@@ -32,37 +32,37 @@ def get_movies
     #     "get_horror": "/discover/movie?api_key=#{key}&with_genres=27",
     #     "get_romance": "/discover/movie?api_key=#{key}&with_genres=10749"
     # }
+    netflix_originals = "/discover/tv?api_key=#{key}&with_networks=213",
     movie_requests = [
-        # "/trending/all/week?api_key=#{key}&language=en-US",
-        "/discover/tv?api_key=#{key}&with_networks=213",
-        # "/movie/top_rated?api_key=#{key}&language=en-US",
-        # "/discover/movie?api_key=#{key}&with_genres=28",
-        # "/discover/movie?api_key=#{key}&with_genres=35",
-        # "/discover/movie?api_key=#{key}&with_genres=27",
-        # "/discover/movie?api_key=#{key}&with_genres=10749"
+        "/trending/all/week?api_key=#{key}&language=en-US",
+        "/movie/top_rated?api_key=#{key}&language=en-US",
+        "/discover/movie?api_key=#{key}&with_genres=28",
+        "/discover/movie?api_key=#{key}&with_genres=35",
+        "/discover/movie?api_key=#{key}&with_genres=27",
+        "/discover/movie?api_key=#{key}&with_genres=10749"
     ]
     
-    movie_requests.each do |request|
-        response = HTTParty.get("#{url}#{request}")
-        data = response["results"]
-        data.each do |movie|
-            Movie.create({
-                "backdrop": movie["backdrop_path"],
-                "first_air_date": movie["first_air_date"],
-                "genre_ids": movie["genre_ids"],
-                "movie_id": movie["id"],
-                "name": movie["name"],
-                "origin_country": movie["origin_country"],
-                "original_language": movie["original_language"],
-                "original_name": movie["original_name"], 
-                "overview": movie["overview"],
-                "popularity": movie["popularity"],
-                "poster": movie["poster_path"],
-                "vote_average": movie["vote_average"],
-                "vote_count": movie["vote_count"]
-            })
-        end
+
+    response = HTTParty.get("#{url}#{netflix_originals}")
+    data = response["results"]
+    data.each do |movie|
+        Movie.create({
+            "backdrop": movie["backdrop_path"],
+            "first_air_date": movie["first_air_date"],
+            "genre_ids": movie["genre_ids"],
+            "movie_id": movie["id"],
+            "name": movie["name"],
+            "origin_country": movie["origin_country"],
+            "original_language": movie["original_language"],
+            "original_name": movie["original_name"], 
+            "overview": movie["overview"],
+            "popularity": movie["popularity"],
+            "poster": movie["poster_path"],
+            "vote_average": movie["vote_average"],
+            "vote_count": movie["vote_count"]
+        })
     end
+    
 end
 
 get_movies
