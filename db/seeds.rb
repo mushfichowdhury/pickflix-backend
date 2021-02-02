@@ -45,7 +45,7 @@ def get_movies
     # ]
     
 
-    response = HTTParty.get(URI.parse(URI.encode("#{url}#{netflix_originals}")))
+    response = HTTParty.get("#{url}#{netflix_originals}")
     data = response["results"]
     data.each do |movie|
         Movie.create({
