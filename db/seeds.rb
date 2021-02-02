@@ -7,14 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Movie.destroy_all
-# User.destroy_all
+User.destroy_all
 # LikedMovie.destroy_all
 
-require 'uri'
-require 'net/http'
-require 'openssl'
-# require 'JSON'
-require "pry"
+require 'rest-client'
 
 User.create({
     username: "user",
@@ -22,6 +18,65 @@ User.create({
     name: "Dwayne",
     image: "https://www.gstatic.com/tv/thumb/persons/235135/235135_v9_ba.jpg"
 })
+
+def get_movies
+    key = "90e02a1e2cdf5cf6621cf4a738631008"
+    url = "https://api.themoviedb.org/3"
+    # movie_requests = {
+    #     "get_trending": "/trending/all/week?api_key=#{key}&language=en-US",
+    #     "get_netflixoriginals": "/discover/tv?api_key=#{key}&with_networks=213",
+    #     "get_toprated": "/movie/top_rated?api_key=#{key}&language=en-US",
+    #     "get_action": "/discover/movie?api_key=#{key}&with_genres=28",
+    #     "get_comedy": "/discover/movie?api_key=#{key}&with_genres=35",
+    #     "get_horror": "/discover/movie?api_key=#{key}&with_genres=27",
+    #     "get_romance": "/discover/movie?api_key=#{key}&with_genres=10749"
+    # }
+    movie_requests = [
+        "/trending/all/week?api_key=#{key}&language=en-US",
+        "/discover/tv?api_key=#{key}&with_networks=213",
+        "/movie/top_rated?api_key=#{key}&language=en-US",
+        "/discover/movie?api_key=#{key}&with_genres=28",
+        "/discover/movie?api_key=#{key}&with_genres=35",
+        "/discover/movie?api_key=#{key}&with_genres=27",
+        "/discover/movie?api_key=#{key}&with_genres=10749"
+    ]
+    
+    movie_requests.each do |request|
+        response = RestClient.get("#{url}#{request}")
+        data = response["results"]
+        Movie.create({
+            "backdrop": data["backdrop_path"],
+            "first_air_date": data["first_air_date"] || data["release_date"],
+            "genre_ids": data["genre_ids"],
+            "movie_id": data["id"],
+            "name": data["name"],
+            "origin_country": data["origin_country"],
+            "original_language": data["original_language"],
+            "original_name": data["original_name"], 
+            "overview": data["overview"],
+            "popularity": data["popularity"],
+            "poster": data["poster_path"],
+            "vote_average": data["vote_average"],
+            "vote_count": data["vote_count"]
+        })
+    end
+end
+
+get_movies
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def get_all_comedies
 #     comedy_genre_ids = "11559,77230,11039,89585,77599,10375,78163,1003219,9302,1078"
