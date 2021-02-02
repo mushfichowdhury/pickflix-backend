@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_193133) do
     t.string "poster"
     t.integer "vote_average"
     t.integer "vote_count"
+    t.string "breed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

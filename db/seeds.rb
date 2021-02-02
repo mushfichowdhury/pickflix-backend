@@ -6,12 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Movie.destroy_all
-# User.destroy_all
+Movie.destroy_all
+User.destroy_all
 # LikedMovie.destroy_all
 
 require 'httparty'
 require 'pry'
+require 'uri'
 
 User.create({
     username: "user",
@@ -22,7 +23,8 @@ User.create({
 
 def get_movies
     key = "90e02a1e2cdf5cf6621cf4a738631008"
-    url = "https://api.themoviedb.org/3"
+    url = "https://api.themoviedb.org/3/"
+
     # movie_requests = {
     #     "get_trending": "/trending/all/week?api_key=#{key}&language=en-US",
     #     "get_netflixoriginals": "/discover/tv?api_key=#{key}&with_networks=213",
@@ -32,18 +34,18 @@ def get_movies
     #     "get_horror": "/discover/movie?api_key=#{key}&with_genres=27",
     #     "get_romance": "/discover/movie?api_key=#{key}&with_genres=10749"
     # }
-    netflix_originals = "/discover/tv?api_key=#{key}&with_networks=213",
-    movie_requests = [
-        "/trending/all/week?api_key=#{key}&language=en-US",
-        "/movie/top_rated?api_key=#{key}&language=en-US",
-        "/discover/movie?api_key=#{key}&with_genres=28",
-        "/discover/movie?api_key=#{key}&with_genres=35",
-        "/discover/movie?api_key=#{key}&with_genres=27",
-        "/discover/movie?api_key=#{key}&with_genres=10749"
-    ]
+    netflix_originals = "discover/tv?api_key=#{key}&with_networks=213",
+    # movie_requests = [
+    #     "/trending/all/week?api_key=#{key}&language=en-US",
+    #     "/movie/top_rated?api_key=#{key}&language=en-US",
+    #     "/discover/movie?api_key=#{key}&with_genres=28",
+    #     "/discover/movie?api_key=#{key}&with_genres=35",
+    #     "/discover/movie?api_key=#{key}&with_genres=27",
+    #     "/discover/movie?api_key=#{key}&with_genres=10749"
+    # ]
     
 
-    response = HTTParty.get("#{url}#{netflix_originals}")
+    response = HTTParty.get(URI.parse(URI.encode("#{url}#{netflix_originals}")))
     data = response["results"]
     data.each do |movie|
         Movie.create({
@@ -59,7 +61,8 @@ def get_movies
             "popularity": movie["popularity"],
             "poster": movie["poster_path"],
             "vote_average": movie["vote_average"],
-            "vote_count": movie["vote_count"]
+            "vote_count": movie["vote_count"],
+            "breed": "Netflix Original"
         })
     end
     

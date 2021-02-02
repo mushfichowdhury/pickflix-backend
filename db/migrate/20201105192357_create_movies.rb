@@ -14,6 +14,7 @@ class CreateMovies < ActiveRecord::Migration[6.0]
       t.string :poster
       t.integer :vote_average
       t.integer :vote_count
+      t.string :breed
 
       t.timestamps
     end
