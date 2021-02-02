@@ -50,5 +50,5 @@ gem "faker", "~> 2.14"
 
 gem "pry"
 
-gem "rest-client"
+gem "httparty"
 

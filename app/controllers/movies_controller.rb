@@ -17,6 +17,6 @@ class MoviesController < ApplicationController
 
     private
     def movies_params
-        params.permit(:id, :netflixid, :title, :image, :rating, :media, :runtime, :largeimage, :imdbid, :priority, :genre, :year, :released, :rated, :director, :writer, :actors, :plot, :language, :country, :awards, :poster, :imdbRating, :imdbVotes)
+        params.permit(:backdrop, :first_air_date, :genre_ids, :movie_id, :name, :origin_country, :original_language, :original_name, :overview, :popularity, :poster, :vote_average, :vote_count)
     end
 end

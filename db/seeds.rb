@@ -7,10 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Movie.destroy_all
-User.destroy_all
+# User.destroy_all
 # LikedMovie.destroy_all
 
-require 'rest-client'
+require 'httparty'
+require 'pry'
 
 User.create({
     username: "user",
@@ -32,33 +33,35 @@ def get_movies
     #     "get_romance": "/discover/movie?api_key=#{key}&with_genres=10749"
     # }
     movie_requests = [
-        "/trending/all/week?api_key=#{key}&language=en-US",
+        # "/trending/all/week?api_key=#{key}&language=en-US",
         "/discover/tv?api_key=#{key}&with_networks=213",
-        "/movie/top_rated?api_key=#{key}&language=en-US",
-        "/discover/movie?api_key=#{key}&with_genres=28",
-        "/discover/movie?api_key=#{key}&with_genres=35",
-        "/discover/movie?api_key=#{key}&with_genres=27",
-        "/discover/movie?api_key=#{key}&with_genres=10749"
+        # "/movie/top_rated?api_key=#{key}&language=en-US",
+        # "/discover/movie?api_key=#{key}&with_genres=28",
+        # "/discover/movie?api_key=#{key}&with_genres=35",
+        # "/discover/movie?api_key=#{key}&with_genres=27",
+        # "/discover/movie?api_key=#{key}&with_genres=10749"
     ]
     
     movie_requests.each do |request|
-        response = RestClient.get("#{url}#{request}")
+        response = HTTParty.get("#{url}#{request}")
         data = response["results"]
-        Movie.create({
-            "backdrop": data["backdrop_path"],
-            "first_air_date": data["first_air_date"] || data["release_date"],
-            "genre_ids": data["genre_ids"],
-            "movie_id": data["id"],
-            "name": data["name"],
-            "origin_country": data["origin_country"],
-            "original_language": data["original_language"],
-            "original_name": data["original_name"], 
-            "overview": data["overview"],
-            "popularity": data["popularity"],
-            "poster": data["poster_path"],
-            "vote_average": data["vote_average"],
-            "vote_count": data["vote_count"]
-        })
+        data.each do |movie|
+            Movie.create({
+                "backdrop": movie["backdrop_path"],
+                "first_air_date": movie["first_air_date"],
+                "genre_ids": movie["genre_ids"],
+                "movie_id": movie["id"],
+                "name": movie["name"],
+                "origin_country": movie["origin_country"],
+                "original_language": movie["original_language"],
+                "original_name": movie["original_name"], 
+                "overview": movie["overview"],
+                "popularity": movie["popularity"],
+                "poster": movie["poster_path"],
+                "vote_average": movie["vote_average"],
+                "vote_count": movie["vote_count"]
+            })
+        end
     end
 end
 
