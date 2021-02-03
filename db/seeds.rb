@@ -47,7 +47,32 @@ def get_movies
 
     response = HTTParty.get("#{url}#{netflix_originals}")
     data = response["results"]
+    # binding.pry
     data.each do |movie|
+        Movie.create({
+            "backdrop": movie["backdrop_path"],
+            "first_air_date": movie["first_air_date"],
+            "genre_ids": movie["genre_ids"],
+            "movie_id": movie["id"],
+            "name": movie["name"],
+            "origin_country": movie["origin_country"],
+            "original_language": movie["original_language"],
+            "original_name": movie["original_name"], 
+            "overview": movie["overview"],
+            "popularity": movie["popularity"],
+            "poster": movie["poster_path"],
+            "vote_average": movie["vote_average"],
+            "vote_count": movie["vote_count"],
+            "breed": "Netflix Original"
+        })
+    end
+
+    ## ACTION MOVIES
+    action_movies = "/discover/movie?api_key=#{key}&with_genres=28",
+    action_response = HTTParty.get("#{url}#{action_movies}")
+    action_data = action_response["results"]
+    # binding.pry
+    action_data.each do |movie|
         Movie.create({
             "backdrop": movie["backdrop_path"],
             "first_air_date": movie["first_air_date"],
