@@ -23,32 +23,40 @@ User.create({
 
 def get_movies
     key = "90e02a1e2cdf5cf6621cf4a738631008"
-    url = "https://api.themoviedb.org/3/"
-    sample = "https://api.themoviedb.org/3/movie/#{movieID}?api_key=#{key}&language=en-US&append_to_response=watch%2Fproviders"
-    
-
-    response = HTTParty.get("#{url}#{netflix_originals}")
-    data = response["results"]
-    binding.pry
-    data.each do |movie|
-        Movie.create({
-            "backdrop": movie["backdrop_path"],
-            "first_air_date": movie["first_air_date"],
-            "genre_ids": movie["genre_ids"],
-            "movie_id": movie["id"],
-            "name": movie["name"],
-            "origin_country": movie["origin_country"],
-            "original_language": movie["original_language"],
-            "original_name": movie["original_name"], 
-            "overview": movie["overview"],
-            "popularity": movie["popularity"],
-            "poster": movie["poster_path"],
-            "vote_average": movie["vote_average"],
-            "vote_count": movie["vote_count"],
-            "breed": "Netflix Original"
-        })
+    base_url = "https://api.themoviedb.org/3/"
+    movieID = 775800
+    sample = "#{base_url}movie/#{movieID}?api_key=#{key}&language=en-US&append_to_response=watch%2Fproviders"
+    # accessing_netflix = response["watch/providers"]["results"]["US"]["flatrate"][0]["provider_name"]
+    while movieID <= 800000 do 
+        response = HTTParty.get("#{sample}")
+        # accessing_flatrate = response["watch/providers"]["results"]["US"]["flatrate"]
+        # binding.pry
+        if response["watch/providers"]["results"]["US"]["flatrate"] == true
+            puts "Success! Movie ##{movieID} has been reached."
+            # binding.pry
+            Movie.create({
+                "backdrop": response["backdrop_path"],
+                "release_date": response["release_date"],
+                "genre_ids": response["genres"],
+                "response_id": response["id"],
+                "title": response["title"],
+                "tagline": response["tagline"],
+                "runtime": response["runtime"],
+                "overview": response["overview"],
+                "popularity": response["popularity"],
+                "poster": response["poster_path"],
+                "vote_average": response["vote_average"],
+                "vote_count": response["vote_count"],
+                "watch_providers": response["watch/providers"]["results"]["US"]["flatrate"],
+                "homepage": response["homepage"]
+            })
+            movieID += 1
+        else 
+            puts movieID
+            puts response["success"]
+            movieID += 1
+        end
     end
-
 end
 
 get_movies
