@@ -24,30 +24,12 @@ User.create({
 def get_movies
     key = "90e02a1e2cdf5cf6621cf4a738631008"
     url = "https://api.themoviedb.org/3/"
-
-    # movie_requests = {
-    #     "get_trending": "/trending/all/week?api_key=#{key}&language=en-US",
-    #     "get_netflixoriginals": "/discover/tv?api_key=#{key}&with_networks=213",
-    #     "get_toprated": "/movie/top_rated?api_key=#{key}&language=en-US",
-    #     "get_action": "/discover/movie?api_key=#{key}&with_genres=28",
-    #     "get_comedy": "/discover/movie?api_key=#{key}&with_genres=35",
-    #     "get_horror": "/discover/movie?api_key=#{key}&with_genres=27",
-    #     "get_romance": "/discover/movie?api_key=#{key}&with_genres=10749"
-    # }
-    netflix_originals = "discover/tv?api_key=#{key}&with_networks=213",
-    # movie_requests = [
-    #     "/trending/all/week?api_key=#{key}&language=en-US",
-    #     "/movie/top_rated?api_key=#{key}&language=en-US",
-    #     "/discover/movie?api_key=#{key}&with_genres=28",
-    #     "/discover/movie?api_key=#{key}&with_genres=35",
-    #     "/discover/movie?api_key=#{key}&with_genres=27",
-    #     "/discover/movie?api_key=#{key}&with_genres=10749"
-    # ]
+    sample = "https://api.themoviedb.org/3/movie/#{movieID}?api_key=#{key}&language=en-US&append_to_response=watch%2Fproviders"
     
 
     response = HTTParty.get("#{url}#{netflix_originals}")
     data = response["results"]
-    # binding.pry
+    binding.pry
     data.each do |movie|
         Movie.create({
             "backdrop": movie["backdrop_path"],
@@ -67,30 +49,6 @@ def get_movies
         })
     end
 
-    ## ACTION MOVIES
-    action_movies = "/discover/movie?api_key=#{key}&with_genres=28",
-    action_response = HTTParty.get("#{url}#{action_movies}")
-    action_data = action_response["results"]
-    # binding.pry
-    action_data.each do |movie|
-        Movie.create({
-            "backdrop": movie["backdrop_path"],
-            "first_air_date": movie["first_air_date"],
-            "genre_ids": movie["genre_ids"],
-            "movie_id": movie["id"],
-            "name": movie["name"],
-            "origin_country": movie["origin_country"],
-            "original_language": movie["original_language"],
-            "original_name": movie["original_name"], 
-            "overview": movie["overview"],
-            "popularity": movie["popularity"],
-            "poster": movie["poster_path"],
-            "vote_average": movie["vote_average"],
-            "vote_count": movie["vote_count"],
-            "breed": "Netflix Original"
-        })
-    end
-    
 end
 
 get_movies
