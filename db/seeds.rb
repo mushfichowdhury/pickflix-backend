@@ -46,6 +46,7 @@ User.create({
 # def get_movies
 #     key = "90e02a1e2cdf5cf6621cf4a738631008"
 #     base_url = "https://api.themoviedb.org/3/"
+#     page_url = "#{base_url}movie/now_playing?api_key=#{key}&region=US&page=#{page_num}"
 #     movieID = 775800
 #     sample = "#{base_url}movie/#{movieID}?api_key=#{key}&language=en-US&append_to_response=watch%2Fproviders"
 #     # accessing_netflix = response["watch/providers"]["results"]["US"]["flatrate"][0]["provider_name"]
@@ -81,7 +82,44 @@ User.create({
 #     end
 # end
 
+
+
+def get_popular_movies
+    key = "90e02a1e2cdf5cf6621cf4a738631008"
+    pagenum = 1
+    base_url = "https://api.themoviedb.org/3/"
+    page_url = "#{base_url}movie/popular?api_key=#{key}&append_to_response=watch/providers&language=en-US&region=US&page=#{pagenum}"
+    # accessing_netflix = response["watch/providers"]["results"]["US"]["flatrate"][0]["provider_name"]
+    while pagenum <= 500 do 
+        response = HTTParty.get("#{page_url}")
+        data = response["results"]
+            data.each do |movie|
+                if movie["original_language"] == "en"
+                    puts "Success! Page ##{pagenum} has been reached."
+                    Movie.create({
+                        "backdrop": movie["backdrop_path"],
+                        "release_date": movie["release_date"],
+                        "genre_ids": movie["genres"],
+                        "movie_id": movie["id"],
+                        "title": movie["title"],
+                        "tagline": "",
+                        "runtime": "",
+                        "overview": movie["overview"],
+                        "popularity": movie["popularity"],
+                        "poster": movie["poster_path"],
+                        "vote_average": movie["vote_average"],
+                        "vote_count": movie["vote_count"],
+                        "watch_providers": "",
+                        "homepage": ""
+                    })
+                end
+            end
+        pagenum += 1
+    end
+end
+
 # get_movies
+get_popular_movies
 
 
 
