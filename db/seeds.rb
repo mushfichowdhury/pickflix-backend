@@ -17,9 +17,31 @@ require 'uri'
 User.create({
     username: "user",
     password_digest: "1234",
-    name: "Dwayne",
-    image: "https://www.gstatic.com/tv/thumb/persons/235135/235135_v9_ba.jpg"
+    first_name: "Dwayne",
+    last_name: "Johnson",
+    image: "https://www.gstatic.com/tv/thumb/persons/235135/235135_v9_ba.jpg",
+    age: 35,
+    city: "Los Angeles",
+    favorite_genres: ["action, comedy, romance"],
+    email: "therock@therock.com",
+    phone: 4423231991
+
 })
+
+User.create({
+    username: "user2",
+    password_digest: "5678",
+    first_name: "Kevin",
+    last_name: "Hart",
+    image: "https://www.gstatic.com/tv/thumb/persons/235135/235135_v9_ba.jpg",
+    age: 35,
+    city: "Los Angeles",
+    favorite_genres: ["action, comedy, romance"],
+    email: "therock@therock.com",
+    phone: 4423231991
+
+})
+
 
 # def get_movies
 #     key = "90e02a1e2cdf5cf6621cf4a738631008"
