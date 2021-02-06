@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_193133) do
     t.string "image"
     t.integer "age"
     t.string "city"
-    t.string "favorite_genre"
+    t.string "favorite_genres"
     t.string "email"
     t.integer "phone"
     t.datetime "created_at", precision: 6, null: false

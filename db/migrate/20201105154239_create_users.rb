@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :image
       t.integer :age
       t.string :city
-      t.string :favorite_genre
+      t.string :favorite_genres
       t.string :email
       t.integer :phone
 
