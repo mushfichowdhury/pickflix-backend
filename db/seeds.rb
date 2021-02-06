@@ -43,6 +43,7 @@ User.create({
 })
 
 
+
 # def get_movies
 #     key = "90e02a1e2cdf5cf6621cf4a738631008"
 #     base_url = "https://api.themoviedb.org/3/"
@@ -118,8 +119,20 @@ def get_popular_movies
     end
 end
 
+def get_watched_movies
+    x = 1
+    while x <= 10 do 
+        WatchedMovie.create({
+            user_id: 1,
+            movie_id: x
+        })
+        x+=1
+    end
+end
+
 # get_movies
 get_popular_movies
+get_watched_movies
 
 
 
