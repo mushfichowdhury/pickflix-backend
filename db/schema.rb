@@ -24,19 +24,19 @@ ActiveRecord::Schema.define(version: 2020_11_05_193133) do
 
   create_table "movies", force: :cascade do |t|
     t.string "backdrop"
-    t.string "first_air_date"
+    t.string "release_date"
     t.string "genre_ids"
     t.integer "movie_id"
-    t.string "name"
-    t.string "origin_country"
-    t.string "original_language"
-    t.string "original_name"
+    t.string "title"
+    t.string "tagline"
+    t.integer "runtime"
     t.string "overview"
     t.integer "popularity"
     t.string "poster"
     t.integer "vote_average"
     t.integer "vote_count"
-    t.string "breed"
+    t.string "watch_providers"
+    t.string "homepage"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -44,8 +44,14 @@ ActiveRecord::Schema.define(version: 2020_11_05_193133) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "image"
+    t.integer "age"
+    t.string "city"
+    t.string "favorite_genre"
+    t.string "email"
+    t.integer "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
