@@ -10,7 +10,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :city
       t.string :favorite_genres
       t.string :email
-      t.integer :phone
+      t.string :phone
 
       t.timestamps
     end

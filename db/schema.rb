@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_193133) do
     t.string "city"
     t.string "favorite_genres"
     t.string "email"
-    t.integer "phone"
+    t.string "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

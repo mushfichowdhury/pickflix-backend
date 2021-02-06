@@ -24,7 +24,7 @@ User.create({
     city: "Los Angeles",
     favorite_genres: ["action, comedy, romance"],
     email: "therock@therock.com",
-    phone: 4423231991
+    phone: "4423231991"
 
 })
 
@@ -33,12 +33,12 @@ User.create({
     password_digest: "5678",
     first_name: "Kevin",
     last_name: "Hart",
-    image: "https://www.gstatic.com/tv/thumb/persons/235135/235135_v9_ba.jpg",
-    age: 35,
+    image: "https://m.media-amazon.com/images/M/MV5BMTY4OTAxMjkxN15BMl5BanBnXkFtZTgwODg5MzYyMTE@._V1_.jpg",
+    age: 31,
     city: "Los Angeles",
-    favorite_genres: ["action, comedy, romance"],
-    email: "therock@therock.com",
-    phone: 4423231991
+    favorite_genres: ["scifi, horror, romance"],
+    email: "thehart@thehart.com",
+    phone: "4423222991"
 
 })
 
